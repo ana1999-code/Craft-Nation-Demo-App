@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
@@ -25,10 +26,10 @@ public class Customer {
     allocationSize = 1)
     private Integer id;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
-    @Email
+    @Column(nullable = false)
     private String email;
 
     private Integer age;
