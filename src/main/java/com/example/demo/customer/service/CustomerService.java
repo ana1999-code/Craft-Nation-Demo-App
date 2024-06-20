@@ -7,16 +7,19 @@ import com.example.demo.customer.model.CustomerUpdateRequest;
 import com.example.demo.exception.DuplicateResourceException;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.RequestValidationException;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class CustomerService {
 
     private final CustomerDao customerDao;
+
+    public CustomerService(@Qualifier("jdbc") CustomerDao customerDao) {
+        this.customerDao = customerDao;
+    }
 
     public List<Customer> findAllCustomers() {
         return customerDao.findAllCustomers();
@@ -70,7 +73,7 @@ public class CustomerService {
             changes = true;
         }
 
-        if (customer.getEmail() != null && !customer.getEmail().equals(customer.getEmail())) {
+        if (customer.getEmail() != null && !customerToUpdate.getEmail().equals(customer.getEmail())) {
             if (customerDao.existsByEmail(customer.getEmail())) {
                 throw new DuplicateResourceException(ValidationUtils.EMAIL_DUPLICATE_ERROR
                         .formatted(customer.getEmail()));
@@ -82,6 +85,6 @@ public class CustomerService {
         if (!changes) {
             throw new RequestValidationException(ValidationUtils.NO_CHANGES_FOUND);
         }
-        return customerDao.save(customerToUpdate);
+        return customerDao.updateCustomer(customerToUpdate);
     }
 }

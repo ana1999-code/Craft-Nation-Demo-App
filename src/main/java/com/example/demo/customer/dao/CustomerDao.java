@@ -18,4 +18,6 @@ public interface CustomerDao {
     boolean existsById(Long id);
 
     void deleteById(Long id);
+
+    Customer updateCustomer(Customer customer);
 }
