@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
+@Table(uniqueConstraints = {
+        @UniqueConstraint(name = "customer_email_unique", columnNames = "email")
+})
 public class Customer {
 
     @Id
