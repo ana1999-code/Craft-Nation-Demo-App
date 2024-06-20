@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.customer.service;
 
 public class ValidationUtils {
     public static final String CUSTOMER_NOT_FOUND_EXCEPTION_MESSAGE = "Customer with id = [%s] not found";

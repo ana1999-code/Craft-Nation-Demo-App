@@ -1,9 +1,9 @@
-package com.example.demo.controller;
+package com.example.demo.customer.controller;
 
-import com.example.demo.entity.Customer;
-import com.example.demo.model.CustomerRegistrationRequest;
-import com.example.demo.model.CustomerUpdateRequest;
-import com.example.demo.service.CustomerService;
+import com.example.demo.customer.entity.Customer;
+import com.example.demo.customer.model.CustomerRegistrationRequest;
+import com.example.demo.customer.model.CustomerUpdateRequest;
+import com.example.demo.customer.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

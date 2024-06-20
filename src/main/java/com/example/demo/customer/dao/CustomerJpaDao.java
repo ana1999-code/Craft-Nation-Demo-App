@@ -1,7 +1,7 @@
-package com.example.demo.dao;
+package com.example.demo.customer.dao;
 
-import com.example.demo.entity.Customer;
-import com.example.demo.repository.CustomerRepository;
+import com.example.demo.customer.entity.Customer;
+import com.example.demo.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
