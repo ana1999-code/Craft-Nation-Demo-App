@@ -32,5 +32,6 @@ public class Customer {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private Integer age;
 }
