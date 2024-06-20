@@ -2,12 +2,12 @@ package com.example.demo.customer.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,8 +27,10 @@ public class Customer {
 
     @Id
     @SequenceGenerator(name = "customer_id_seq",
-    sequenceName = "customer_id_seq",
-    allocationSize = 1)
+            sequenceName = "customer_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "customer_id_seq")
     private Integer id;
 
     @Column(nullable = false)
