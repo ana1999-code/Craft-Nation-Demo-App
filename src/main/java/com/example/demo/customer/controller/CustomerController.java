@@ -33,28 +33,28 @@ public class CustomerController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable("id")Integer id){
+    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") Long id) {
         Customer customer = customerService.findCustomerById(id);
         return ResponseEntity.ok(customer);
     }
 
     @PostMapping
-    public ResponseEntity<Customer> registerCustomer(@RequestBody @Valid CustomerRegistrationRequest customer){
+    public ResponseEntity<Customer> registerCustomer(@RequestBody @Valid CustomerRegistrationRequest customer) {
         Customer savedCustomer = customerService.saveCustomer(customer);
         return ResponseEntity.created(URI.create(savedCustomer.getId().toString()))
                 .body(savedCustomer);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity deleteCustomer(@PathVariable("id") Integer id){
+    public ResponseEntity deleteCustomer(@PathVariable("id") Long id) {
         customerService.deleteCustomer(id);
         return ResponseEntity.noContent()
                 .build();
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable("id") Integer id,
-            @RequestBody CustomerUpdateRequest customer){
+    public ResponseEntity<Customer> updateCustomer(@PathVariable("id") Long id,
+                                                   @RequestBody CustomerUpdateRequest customer) {
         Customer updatedCustomer = customerService.updateCustomer(id, customer);
         return ResponseEntity.ok(updatedCustomer);
     }

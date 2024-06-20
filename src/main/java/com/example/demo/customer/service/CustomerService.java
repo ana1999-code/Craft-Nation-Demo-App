@@ -2,11 +2,11 @@ package com.example.demo.customer.service;
 
 import com.example.demo.customer.dao.CustomerDao;
 import com.example.demo.customer.entity.Customer;
+import com.example.demo.customer.model.CustomerRegistrationRequest;
+import com.example.demo.customer.model.CustomerUpdateRequest;
 import com.example.demo.exception.DuplicateResourceException;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.RequestValidationException;
-import com.example.demo.customer.model.CustomerRegistrationRequest;
-import com.example.demo.customer.model.CustomerUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class CustomerService {
         return customerDao.findAllCustomers();
     }
 
-    public Customer findCustomerById(Integer id) {
+    public Customer findCustomerById(Long id) {
         return customerDao.findCustomerById(id)
                 .orElseThrow(() -> new NotFoundException(ValidationUtils.CUSTOMER_NOT_FOUND_EXCEPTION_MESSAGE
                         .formatted(id)));
@@ -45,7 +45,7 @@ public class CustomerService {
         return customerDao.save(newCustomer);
     }
 
-    public void deleteCustomer(Integer id) {
+    public void deleteCustomer(Long id) {
         if (!customerDao.existsById(id)) {
             throw new NotFoundException(ValidationUtils.CUSTOMER_NOT_FOUND_EXCEPTION_MESSAGE
                     .formatted(id));
@@ -54,7 +54,7 @@ public class CustomerService {
         customerDao.deleteById(id);
     }
 
-    public Customer updateCustomer(Integer id, CustomerUpdateRequest customer) {
+    public Customer updateCustomer(Long id, CustomerUpdateRequest customer) {
         boolean changes = false;
         Customer customerToUpdate = customerDao.findCustomerById(id)
                 .orElseThrow(() -> new NotFoundException(ValidationUtils.CUSTOMER_NOT_FOUND_EXCEPTION_MESSAGE

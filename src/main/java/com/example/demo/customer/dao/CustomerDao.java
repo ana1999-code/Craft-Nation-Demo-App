@@ -9,13 +9,13 @@ public interface CustomerDao {
 
     List<Customer> findAllCustomers();
 
-    Optional<Customer> findCustomerById(Integer id);
+    Optional<Customer> findCustomerById(Long id);
 
     boolean existsByEmail(String email);
 
     Customer save(Customer newCustomer);
 
-    boolean existsById(Integer id);
+    boolean existsById(Long id);
 
-    void deleteById(Integer id);
+    void deleteById(Long id);
 }

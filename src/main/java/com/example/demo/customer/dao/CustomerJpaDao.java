@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class CustomerJpaDao implements CustomerDao{
+public class CustomerJpaDao implements CustomerDao {
 
     private final CustomerRepository customerRepository;
 
@@ -20,7 +20,7 @@ public class CustomerJpaDao implements CustomerDao{
     }
 
     @Override
-    public Optional<Customer> findCustomerById(Integer id) {
+    public Optional<Customer> findCustomerById(Long id) {
         return customerRepository.findById(id);
     }
 
@@ -35,12 +35,12 @@ public class CustomerJpaDao implements CustomerDao{
     }
 
     @Override
-    public boolean existsById(Integer id) {
+    public boolean existsById(Long id) {
         return customerRepository.existsById(id);
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         customerRepository.deleteById(id);
     }
 }

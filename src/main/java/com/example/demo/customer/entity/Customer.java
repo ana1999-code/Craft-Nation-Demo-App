@@ -31,7 +31,7 @@ public class Customer {
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "customer_id_seq")
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
