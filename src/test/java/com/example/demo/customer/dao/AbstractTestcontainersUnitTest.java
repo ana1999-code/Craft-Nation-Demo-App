@@ -34,6 +34,7 @@ public abstract class AbstractTestcontainersUnitTest {
                     .withUsername("postgres")
                     .withPassword("12345");
 
+    // add properties from the test container that will be used in our tests instead of the app properties
     @DynamicPropertySource
     private static void registerDataSourceProperties(DynamicPropertyRegistry registry) {
         registry.add(
