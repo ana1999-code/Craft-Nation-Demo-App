@@ -19,7 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "id")
 @Table(uniqueConstraints = {
         @UniqueConstraint(name = "customer_email_unique", columnNames = "email")
 })

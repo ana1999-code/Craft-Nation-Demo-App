@@ -1,12 +1,17 @@
 package com.example.demo.customer.dao;
 
+import com.github.javafaker.Faker;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import javax.sql.DataSource;
 
 @Testcontainers
 public abstract class AbstractTestcontainersUnitTest {
@@ -46,4 +51,20 @@ public abstract class AbstractTestcontainersUnitTest {
                 postgreSQLContainer::getPassword
         );
     }
+
+    protected static DataSource getDataSource() {
+        return DataSourceBuilder
+                .create()
+                .driverClassName(postgreSQLContainer.getDriverClassName())
+                .url(postgreSQLContainer.getJdbcUrl())
+                .username(postgreSQLContainer.getUsername())
+                .password(postgreSQLContainer.getPassword())
+                .build();
+    }
+
+    protected static JdbcTemplate getJdbcTemplate() {
+        return new JdbcTemplate(getDataSource());
+    }
+
+    protected static final Faker FAKER = new Faker();
 }
