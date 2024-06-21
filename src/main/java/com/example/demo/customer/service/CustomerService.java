@@ -59,9 +59,7 @@ public class CustomerService {
 
     public Customer updateCustomer(Long id, CustomerUpdateRequest customer) {
         boolean changes = false;
-        Customer customerToUpdate = customerDao.findCustomerById(id)
-                .orElseThrow(() -> new NotFoundException(ValidationUtils.CUSTOMER_NOT_FOUND_EXCEPTION_MESSAGE
-                        .formatted(id)));
+        Customer customerToUpdate = findCustomerById(id);
 
         if (customer.getName() != null && !customerToUpdate.getName().equals(customer.getName())) {
             customerToUpdate.setName(customer.getName());
