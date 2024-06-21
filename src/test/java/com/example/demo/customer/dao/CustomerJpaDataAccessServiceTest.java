@@ -11,7 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static com.example.demo.customer.utils.TestUtils.getCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
