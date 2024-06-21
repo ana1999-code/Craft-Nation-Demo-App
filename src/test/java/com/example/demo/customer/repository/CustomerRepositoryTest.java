@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.Random;
 import java.util.UUID;
 
+import static com.example.demo.customer.utils.TestUtils.FAKER;
+import static com.example.demo.customer.utils.TestUtils.getCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 // disable the embedded database in order to use our database
@@ -30,10 +30,7 @@ class CustomerRepositoryTest extends AbstractTestcontainersUnitTest {
 
     @Test
     void existsByEmail() {
-        Customer customer = new Customer();
-        customer.setName(FAKER.name().fullName());
-        customer.setEmail(UUID.randomUUID() + FAKER.internet().safeEmailAddress());
-        customer.setAge(new Random().nextInt(16, 80));
+        Customer customer = getCustomer();
         Customer saved = customerRepository.save(customer);
 
         boolean existsByEmail = customerRepository.existsByEmail(saved.getEmail());

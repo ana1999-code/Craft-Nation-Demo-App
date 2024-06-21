@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.example.demo.customer.utils.TestUtils.getCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.mockito.Mockito.verify;
@@ -27,7 +28,7 @@ class CustomerJpaDataAccessServiceTest {
     @Mock
     private CustomerRepository customerRepository;
 
-    private final Customer customer = new Customer(1L, "John", "john@mail.com", 23);
+    private final Customer customer = getCustomer();
 
     @Test
     void findAllCustomers() {

@@ -1,6 +1,7 @@
 package com.example.demo.customer.dao;
 
 import com.example.demo.customer.entity.Customer;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,8 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
+import static com.example.demo.customer.utils.TestUtils.FAKER;
+import static com.example.demo.customer.utils.TestUtils.getCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CustomerJdbcDataAccessServiceTest extends AbstractTestcontainersUnitTest {
@@ -22,10 +25,7 @@ class CustomerJdbcDataAccessServiceTest extends AbstractTestcontainersUnitTest {
 
     @Test
     void findAllCustomers() {
-        Customer customer = new Customer();
-        customer.setName(FAKER.name().fullName());
-        customer.setEmail(UUID.randomUUID() + FAKER.internet().safeEmailAddress());
-        customer.setAge(new Random().nextInt(16, 80));
+        Customer customer = getCustomer();
         jdbcDataAccessService.save(customer);
 
         List<Customer> allCustomers = jdbcDataAccessService.findAllCustomers();
@@ -35,10 +35,7 @@ class CustomerJdbcDataAccessServiceTest extends AbstractTestcontainersUnitTest {
 
     @Test
     void findCustomerById() {
-        Customer customer = new Customer();
-        customer.setName(FAKER.name().fullName());
-        customer.setEmail(UUID.randomUUID() + FAKER.internet().safeEmailAddress());
-        customer.setAge(new Random().nextInt(16, 80));
+        Customer customer = getCustomer();
         Customer saved = jdbcDataAccessService.save(customer);
 
         Optional<Customer> customerById = jdbcDataAccessService.findCustomerById(saved.getId());
@@ -49,10 +46,7 @@ class CustomerJdbcDataAccessServiceTest extends AbstractTestcontainersUnitTest {
 
     @Test
     void existsByEmail() {
-        Customer customer = new Customer();
-        customer.setName(FAKER.name().fullName());
-        customer.setEmail(UUID.randomUUID() + FAKER.internet().safeEmailAddress());
-        customer.setAge(new Random().nextInt(16, 80));
+        Customer customer = getCustomer();
         Customer saved = jdbcDataAccessService.save(customer);
 
         boolean existsByEmail = jdbcDataAccessService.existsByEmail(saved.getEmail());
@@ -70,10 +64,7 @@ class CustomerJdbcDataAccessServiceTest extends AbstractTestcontainersUnitTest {
 
     @Test
     void save() {
-        Customer customer = new Customer();
-        customer.setName(FAKER.name().fullName());
-        customer.setEmail(UUID.randomUUID() + FAKER.internet().safeEmailAddress());
-        customer.setAge(new Random().nextInt(16, 80));
+        Customer customer = getCustomer();
         Customer saved = jdbcDataAccessService.save(customer);
 
         assertThat(saved.equals(customer)).isTrue();
@@ -81,10 +72,7 @@ class CustomerJdbcDataAccessServiceTest extends AbstractTestcontainersUnitTest {
 
     @Test
     void existsById() {
-        Customer customer = new Customer();
-        customer.setName(FAKER.name().fullName());
-        customer.setEmail(UUID.randomUUID() + FAKER.internet().safeEmailAddress());
-        customer.setAge(new Random().nextInt(16, 80));
+        Customer customer = getCustomer();
         Customer saved = jdbcDataAccessService.save(customer);
 
         boolean existsById = jdbcDataAccessService.existsById(saved.getId());
@@ -102,10 +90,7 @@ class CustomerJdbcDataAccessServiceTest extends AbstractTestcontainersUnitTest {
 
     @Test
     void deleteById() {
-        Customer customer = new Customer();
-        customer.setName(FAKER.name().fullName());
-        customer.setEmail(UUID.randomUUID() + FAKER.internet().safeEmailAddress());
-        customer.setAge(new Random().nextInt(16, 80));
+        Customer customer = getCustomer();
         Customer saved = jdbcDataAccessService.save(customer);
 
         jdbcDataAccessService.deleteById(saved.getId());
@@ -117,10 +102,7 @@ class CustomerJdbcDataAccessServiceTest extends AbstractTestcontainersUnitTest {
 
     @Test
     void updateCustomer() {
-        Customer customer = new Customer();
-        customer.setName(FAKER.name().fullName());
-        customer.setEmail(UUID.randomUUID() + FAKER.internet().safeEmailAddress());
-        customer.setAge(new Random().nextInt(16, 80));
+        Customer customer = getCustomer();
         Customer saved = jdbcDataAccessService.save(customer);
 
         saved.setName(FAKER.name().fullName());
