@@ -1,4 +1,4 @@
-package com.example.demo.customer.dao;
+package com.example.demo.customer;
 
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;

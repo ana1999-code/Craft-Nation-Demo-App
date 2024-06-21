@@ -1,6 +1,6 @@
 package com.example.demo.customer.repository;
 
-import com.example.demo.customer.dao.AbstractTestcontainersUnitTest;
+import com.example.demo.customer.AbstractTestcontainersUnitTest;
 import com.example.demo.customer.entity.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

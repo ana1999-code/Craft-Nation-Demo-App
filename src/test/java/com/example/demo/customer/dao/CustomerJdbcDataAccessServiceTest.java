@@ -1,7 +1,7 @@
 package com.example.demo.customer.dao;
 
+import com.example.demo.customer.AbstractTestcontainersUnitTest;
 import com.example.demo.customer.entity.Customer;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

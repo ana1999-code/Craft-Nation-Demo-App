@@ -1,5 +1,6 @@
 package com.example.demo.customer.dao;
 
+import com.example.demo.customer.AbstractTestcontainersUnitTest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
