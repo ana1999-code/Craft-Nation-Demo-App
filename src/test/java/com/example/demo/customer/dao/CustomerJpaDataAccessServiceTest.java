@@ -112,7 +112,7 @@ class CustomerJpaDataAccessServiceTest {
     void deleteById() {
         Mockito.doNothing().when(customerRepository).deleteById(customer.getId());
 
-        assertThatNoException().isThrownBy(() -> customerRepository.deleteById(customer.getId()));
+        assertThatNoException().isThrownBy(() -> jpaDataAccessService.deleteById(customer.getId()));
         verify(customerRepository).deleteById(customer.getId());
     }
 
