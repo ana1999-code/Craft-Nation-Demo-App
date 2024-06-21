@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -122,7 +122,7 @@ class CustomerServiceTest {
         assertThat(duplicateResourceException.getMessage())
                 .isEqualTo(EMAIL_DUPLICATE_ERROR.formatted(customer.getEmail()));
         verify(customerDao).existsByEmail(anyString());
-        verify(customerDao, times(0)).save(any());
+        verify(customerDao, never()).save(any());
     }
 
     @Test
@@ -148,7 +148,7 @@ class CustomerServiceTest {
                 .isEqualTo(CUSTOMER_NOT_FOUND_EXCEPTION_MESSAGE.formatted(customer.getId()));
 
         verify(customerDao).existsById(anyLong());
-        verify(customerDao, times(0)).deleteById(anyLong());
+        verify(customerDao, never()).deleteById(anyLong());
     }
 
     @Test
@@ -279,7 +279,7 @@ class CustomerServiceTest {
                 .isEqualTo(CUSTOMER_NOT_FOUND_EXCEPTION_MESSAGE.formatted(customer.getId()));
 
         verify(customerDao).findCustomerById(anyLong());
-        verify(customerDao, times(0)).updateCustomer(any());
+        verify(customerDao, never()).updateCustomer(any());
     }
 
     @Test
@@ -300,7 +300,7 @@ class CustomerServiceTest {
                 .isEqualTo(NO_CHANGES_FOUND);
 
         verify(customerDao).findCustomerById(anyLong());
-        verify(customerDao, times(0)).updateCustomer(any());
+        verify(customerDao, never()).updateCustomer(any());
     }
 
     @Test
@@ -323,6 +323,6 @@ class CustomerServiceTest {
 
         verify(customerDao).findCustomerById(anyLong());
         verify(customerDao).existsByEmail(anyString());
-        verify(customerDao, times(0)).updateCustomer(any());
+        verify(customerDao, never()).updateCustomer(any());
     }
 }
