@@ -1,7 +1,7 @@
 package com.example.demo.customer.service;
 
-public class ValidationUtils {
-    public static final String CUSTOMER_NOT_FOUND_EXCEPTION_MESSAGE = "Customer with id = [%s] not found";
-    public static final String EMAIL_DUPLICATE_ERROR = "Customer with email = [%s] already exists";
-    public static final String NO_CHANGES_FOUND = "No changes found";
+public interface ValidationUtils {
+    String CUSTOMER_NOT_FOUND_EXCEPTION_MESSAGE = "Customer with id = [%s] not found";
+    String EMAIL_DUPLICATE_ERROR = "Customer with email = [%s] already exists";
+    String NO_CHANGES_FOUND = "No changes found";
 }
