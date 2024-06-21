@@ -10,6 +10,8 @@ import com.example.demo.exception.RequestValidationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -42,6 +44,9 @@ class CustomerServiceTest {
 
     @Mock
     private CustomerDao customerDao;
+
+    @Captor
+    private ArgumentCaptor<Customer> customerArgumentCaptor;
 
     private final Customer customer = getCustomer();
 
@@ -162,15 +167,99 @@ class CustomerServiceTest {
                         customerUpdateRequest.getAge()));
 
         Customer updatedCustomer = customerService.updateCustomer(customer.getId(), customerUpdateRequest);
+        verify(customerDao).findCustomerById(anyLong());
+        verify(customerDao).updateCustomer(customerArgumentCaptor.capture());
+        Customer customerArgumentCaptorValue = customerArgumentCaptor.getValue();
 
         assertAll(
-                () -> assertThat(updatedCustomer.getName()).isEqualTo(customerUpdateRequest.getName()),
-                () -> assertThat(updatedCustomer.getEmail()).isEqualTo(customerUpdateRequest.getEmail()),
-                () -> assertThat(updatedCustomer.getAge()).isEqualTo(customerUpdateRequest.getAge())
+                () -> assertThat(updatedCustomer.getName()).isEqualTo(customerArgumentCaptorValue.getName()),
+                () -> assertThat(updatedCustomer.getEmail()).isEqualTo(customerArgumentCaptorValue.getEmail()),
+                () -> assertThat(updatedCustomer.getAge()).isEqualTo(customerArgumentCaptorValue.getAge())
         );
+    }
+
+    @Test
+    void updateCustomerName() {
+        CustomerUpdateRequest customerUpdateRequest = new CustomerUpdateRequest();
+        customerUpdateRequest.setName(FAKER.name().fullName());
+        customerUpdateRequest.setEmail(null);
+        customerUpdateRequest.setAge(null);
+
+        when(customerDao.findCustomerById(anyLong()))
+                .thenReturn(Optional.of(customer));
+        when(customerDao.updateCustomer(any()))
+                .thenReturn(new Customer(1L,
+                        customerUpdateRequest.getName(),
+                        customer.getEmail(),
+                        customer.getAge()));
+
+        Customer updatedCustomer = customerService.updateCustomer(customer.getId(), customerUpdateRequest);
 
         verify(customerDao).findCustomerById(anyLong());
-        verify(customerDao).updateCustomer(any());
+        verify(customerDao).updateCustomer(customerArgumentCaptor.capture());
+        Customer customerArgumentCaptorValue = customerArgumentCaptor.getValue();
+
+        assertAll(
+                () -> assertThat(updatedCustomer.getName()).isEqualTo(customerArgumentCaptorValue.getName()),
+                () -> assertThat(updatedCustomer.getEmail()).isEqualTo(customerArgumentCaptorValue.getEmail()),
+                () -> assertThat(updatedCustomer.getAge()).isEqualTo(customerArgumentCaptorValue.getAge())
+        );
+    }
+
+    @Test
+    void updateCustomerEmail() {
+        CustomerUpdateRequest customerUpdateRequest = new CustomerUpdateRequest();
+        customerUpdateRequest.setName(null);
+        customerUpdateRequest.setEmail(FAKER.internet().safeEmailAddress());
+        customerUpdateRequest.setAge(null);
+
+        when(customerDao.findCustomerById(anyLong()))
+                .thenReturn(Optional.of(customer));
+        when(customerDao.updateCustomer(any()))
+                .thenReturn(new Customer(1L,
+                        customer.getName(),
+                        customerUpdateRequest.getEmail(),
+                        customer.getAge()));
+
+        Customer updatedCustomer = customerService.updateCustomer(customer.getId(), customerUpdateRequest);
+
+        verify(customerDao).findCustomerById(anyLong());
+        verify(customerDao).updateCustomer(customerArgumentCaptor.capture());
+        Customer customerArgumentCaptorValue = customerArgumentCaptor.getValue();
+
+        assertAll(
+                () -> assertThat(updatedCustomer.getName()).isEqualTo(customerArgumentCaptorValue.getName()),
+                () -> assertThat(updatedCustomer.getEmail()).isEqualTo(customerArgumentCaptorValue.getEmail()),
+                () -> assertThat(updatedCustomer.getAge()).isEqualTo(customerArgumentCaptorValue.getAge())
+        );
+    }
+
+    @Test
+    void updateCustomerAge() {
+        CustomerUpdateRequest customerUpdateRequest = new CustomerUpdateRequest();
+        customerUpdateRequest.setName(null);
+        customerUpdateRequest.setEmail(null);
+        customerUpdateRequest.setAge(new Random().nextInt(16, 99));
+
+        when(customerDao.findCustomerById(anyLong()))
+                .thenReturn(Optional.of(customer));
+        when(customerDao.updateCustomer(any()))
+                .thenReturn(new Customer(1L,
+                        customer.getName(),
+                        customer.getEmail(),
+                        customerUpdateRequest.getAge()));
+
+        Customer updatedCustomer = customerService.updateCustomer(customer.getId(), customerUpdateRequest);
+
+        verify(customerDao).findCustomerById(anyLong());
+        verify(customerDao).updateCustomer(customerArgumentCaptor.capture());
+        Customer customerArgumentCaptorValue = customerArgumentCaptor.getValue();
+
+        assertAll(
+                () -> assertThat(updatedCustomer.getName()).isEqualTo(customerArgumentCaptorValue.getName()),
+                () -> assertThat(updatedCustomer.getEmail()).isEqualTo(customerArgumentCaptorValue.getEmail()),
+                () -> assertThat(updatedCustomer.getAge()).isEqualTo(customerArgumentCaptorValue.getAge())
+        );
     }
 
     @Test
