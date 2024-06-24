@@ -19,17 +19,4 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-	@Bean
-	CommandLineRunner runner(CustomerRepository customerRepository){
-		return args -> {
-			Faker faker = new Faker();
-
-			Customer customer = new Customer();
-			customer.setName(faker.name().fullName());
-			customer.setEmail(faker.internet().safeEmailAddress());
-			customer.setAge(new Random().nextInt(16, 99));
-
-			customerRepository.save(customer);
-		};
-	}
 }
