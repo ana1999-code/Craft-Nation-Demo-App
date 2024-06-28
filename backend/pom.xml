@@ -32,6 +32,8 @@
         <jakarta.validation.version>3.1.0</jakarta.validation.version>
         <cucumber.version>7.18.0</cucumber.version>
         <docker.username>anavlas</docker.username>
+        <docker.image.name>craft-nation</docker.image.name>
+        <docker.image.tag/>
     </properties>
     <dependencies>
         <dependency>
@@ -229,7 +231,7 @@
                         </platforms>
                     </from>
                     <to>
-                        <image>docker.io/${docker.username}/${project.artifactId}:${project.version}</image>
+                        <image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
                         <tags>
                             <tag>latest</tag>
                         </tags>
