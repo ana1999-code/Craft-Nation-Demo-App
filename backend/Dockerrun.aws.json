@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "craft-nation",
-      "image": "anavlas/craft-nation:latest",
+      "image": "anavlas/craft-nation:28.06.2024.18.49.45",
       "essential": true,
       "memory": 512,
       "portMappings": [
