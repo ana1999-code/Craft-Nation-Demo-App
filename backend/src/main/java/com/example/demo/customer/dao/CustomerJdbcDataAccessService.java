@@ -39,7 +39,7 @@ public class CustomerJdbcDataAccessService implements CustomerDao {
 
     @Override
     public boolean existsByEmail(String email) {
-        String sql = "SELECT * FROM CUSTOMER WHERE EMAIL = ?";
+        String sql = "SELECT * FROM CUSTOMER WHERE NAME = ?";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
 
         return !jdbcTemplate.query(sql, rowMapper, email).isEmpty();
