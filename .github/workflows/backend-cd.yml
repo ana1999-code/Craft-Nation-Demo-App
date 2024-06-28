@@ -33,7 +33,7 @@ jobs:
       - name: Slack Message After Database Setup
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+          channel_id: '${{ secrets.SLACK_CHANNEL_ID }}'
           slack-message: "Deployment started :progrss_bar: :fingerscrossed:"
         env:
           SLACK_BOT_TOKEN:  ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -58,7 +58,7 @@ jobs:
       - name: Slack Message After Maven Verify
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+          channel_id: '${{ secrets.SLACK_CHANNEL_ID }}'
           slack-message: ":maven: Building with Maven"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -72,7 +72,7 @@ jobs:
       - name: Slack Message After Docker Image Tag Update
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+          channel_id: '${{ secrets.SLACK_CHANNEL_ID }}'
           slack-message: ":docker: Image tag ${{steps.build-number.outputs.BUILD_NUMBER}} pushed to ${{ secrets.DOCKERHUB_URL }}"
         env:
           SLACK_BOT_TOKEN:  ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -91,14 +91,14 @@ jobs:
       - name: Slack Message After AWS Deployment
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+          channel_id: '${{ secrets.SLACK_CHANNEL_ID }}'
           slack-message: ":aws: Deployed to Elastic Beanstalk"
         env:
           SLACK_BOT_TOKEN:  ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Slack Message After Commit and Push
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+          channel_id: '${{ secrets.SLACK_CHANNEL_ID }}'
           slack-message: ":github: Committing to repo ${{ secrets.APPLICATION_GITHUB_URL }}"
         env:
           SLACK_BOT_TOKEN:  ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -113,7 +113,7 @@ jobs:
       - name: Slack Message After Completed Deployment
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+          channel_id: '${{ secrets.SLACK_CHANNEL_ID }}'
           slack-message: "Deployment and commit completed :check: - ${{ secrets.EB_ENVIRONMENT_URL }}"
         env:
           SLACK_BOT_TOKEN:  ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -122,7 +122,7 @@ jobs:
         if: always()
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+          channel_id: '${{ secrets.SLACK_CHANNEL_ID }}'
           slack-message: "Job Status ${{ job.status }}"
         env:
           SLACK_BOT_TOKEN:  ${{ secrets.SLACK_WEBHOOK_URL }}
